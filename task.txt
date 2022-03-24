@@ -1,0 +1,18 @@
+Need to use these 4 controllers
+
+Task 1: Recording with audio which will play in background
+- Class : RecordingWithSound
+
+Task 2: Recording with H or V position
+- Class : RecordingHVVC
+
+Task 3: Recording with Text, Image, Video
+- Class : RecordingTextImageVideoVC
+
+Task 4: Recording with Lyrics
+- Class : RecordingWithSoundLyrics
+
+- Camera class in 'Camera' folder and other all common classes used in demo
+
+Note: You have to modify little bit code as per your requirements
+- All files fetched from bundle in this demo, so you can modify code accordingly
