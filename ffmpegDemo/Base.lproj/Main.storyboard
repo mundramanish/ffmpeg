@@ -623,7 +623,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="btnRecordingClick:" destination="dE7-wa-Htj" eventType="touchUpInside" id="dD7-mm-mC7"/>
-                                    <action selector="btnRecordingClick:" destination="Sje-ve-D9m" eventType="touchUpInside" id="iMJ-ef-d1h"/>
                                 </connections>
                             </button>
                         </subviews>

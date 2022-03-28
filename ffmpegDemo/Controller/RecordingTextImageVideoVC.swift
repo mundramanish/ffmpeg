@@ -269,7 +269,7 @@ class RecordingTextImageVideoVC: BaseViewController, StoryboardSceneBased, LogDe
             
             self.playerVideo = AVPlayer(url: URL(fileURLWithPath: path))
             self.playerLayer = AVPlayerLayer(player: self.playerVideo)
-            self.playerLayer?.videoGravity = .resize
+            self.playerLayer?.videoGravity = .resizeAspectFill
             self.playerLayer?.frame = self.viewVideoPlayer.bounds
             self.viewVideoPlayer.layer.addSublayer(self.playerLayer!)
             

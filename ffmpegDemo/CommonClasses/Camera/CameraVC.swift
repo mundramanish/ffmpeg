@@ -279,7 +279,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate {
                     
                     self.previewView.videoPreviewLayer.connection?.videoOrientation = initialVideoOrientation
                     if self.isHVView ?? false {
-                        self.previewView.videoPreviewLayer.videoGravity = .resizeAspect
+                        self.previewView.videoPreviewLayer.videoGravity = .resizeAspectFill
                     } else {
                         self.previewView.videoPreviewLayer.videoGravity = .resizeAspectFill
                     }

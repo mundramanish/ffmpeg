@@ -12,7 +12,7 @@ import DateHelper
 import LinearProgressBar
 
 /// This controller will be used for recording Horizontal & Vertical form and respective ffmpeg operation
-class RecordingHVVC: BaseViewController, StoryboardSceneBased {
+class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, StatisticsDelegate {
     
     static let sceneStoryboard = UIStoryboard(name: "Main", bundle: nil)
     
@@ -97,6 +97,12 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased {
                 
             }
         }
+        //  Delegates Log and Statistics
+        DispatchQueue.main.async {
+            MobileFFmpegConfig.setLogDelegate(self)
+            MobileFFmpegConfig.setStatisticsDelegate(self)
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -253,4 +259,22 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased {
             }
         }
     }
+    
+    func logCallback(_ executionId: Int, _ level: Int32, _ message: String!) {
+        print(message ?? "")
+    }
+    
+    func statisticsCallback(_ statistics: Statistics!) {
+        if statistics == nil {
+            return
+        }
+        
+//        // Will get video duration , like how much processing is completed
+//        let timeInMilliseconds = statistics?.getTime() ?? 0
+//        if timeInMilliseconds > 0 {
+//
+//            print((Int(timeInMilliseconds) / 1000 * (100 / Int(self.durationVideo ?? 0.0))))
+//        }
+    }
+
 }
