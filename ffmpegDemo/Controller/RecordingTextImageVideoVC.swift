@@ -334,7 +334,7 @@ class RecordingTextImageVideoVC: BaseViewController, StoryboardSceneBased, LogDe
         
         var strCompleteCommand = ""
         
-        strCompleteCommand = String(format: "-hide_banner -i %@ %@ -filter_complex \"%@\" -map \"[v1]\" -map 0:a -shortest -c:v mpeg4 -y %@", cameraVideoPath, self.arrInputVideos.joined(separator: " "), self.arrCommand.joined(separator: ";"), distinationPath)
+        strCompleteCommand = String(format: "-hide_banner -i %@ %@ -filter_complex \"%@\" -map \"[v1]\" -map 0:a -shortest -preset ultrafast -y %@", cameraVideoPath, self.arrInputVideos.joined(separator: " "), self.arrCommand.joined(separator: ";"), distinationPath)
         
         print(strCompleteCommand)
         let result1 = MobileFFmpeg.execute(strCompleteCommand)
@@ -399,7 +399,7 @@ class RecordingTextImageVideoVC: BaseViewController, StoryboardSceneBased, LogDe
         
         var strCompleteCommand = ""
         
-        strCompleteCommand = String(format: "-hide_banner -i %@ %@ -filter_complex \"%@\" -map \"[v1]\" -map 0:a -c:v mpeg4 -y %@", cameraVideoPath, self.arrInputImages.joined(separator: " "), self.arrCommand.joined(separator: ";"), distinationPath)
+        strCompleteCommand = String(format: "-hide_banner -i %@ %@ -filter_complex \"%@\" -map \"[v1]\" -map 0:a -preset ultrafast -y %@", cameraVideoPath, self.arrInputImages.joined(separator: " "), self.arrCommand.joined(separator: ";"), distinationPath)
         
         print(strCompleteCommand)
         let result1 = MobileFFmpeg.execute(strCompleteCommand)
@@ -461,7 +461,7 @@ class RecordingTextImageVideoVC: BaseViewController, StoryboardSceneBased, LogDe
         
         var strCompleteCommand = ""
         
-        strCompleteCommand = String(format: "-hide_banner -i %@ -vf \"%@\" -c:v mpeg4 -y %@", cameraVideoPath, self.arrCommand.joined(separator: ","), distinationPath)
+        strCompleteCommand = String(format: "-hide_banner -i %@ -vf \"%@\" -preset ultrafast -y %@", cameraVideoPath, self.arrCommand.joined(separator: ","), distinationPath)
         
         print(strCompleteCommand)
         let result1 = MobileFFmpeg.execute(strCompleteCommand)

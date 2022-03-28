@@ -214,7 +214,7 @@ extension RecordingWithSoundLyrics {
         let fontNameMapping = ["MyFontName" : "BebasNeueBold"]
         MobileFFmpegConfig.setFontDirectory(MAIN_BUNDLE.resourcePath, with: fontNameMapping)
         MobileFFmpegConfig.ignoreSignal(SIGXCPU)
-        let strCompleteCommand = String(format: "-hide_banner -i %@ -i %@ -vf subtitles=%@:force_style='FontName=MyFontName' -shortest -c:v mpeg4 -y %@", cameraVideoPath, pathAudio!, pathSRT, distinationPath!)
+        let strCompleteCommand = String(format: "-hide_banner -i %@ -i %@ -vf subtitles=%@:force_style='FontName=MyFontName' -shortest -preset ultrafast -y %@", cameraVideoPath, pathAudio!, pathSRT, distinationPath!)
         print(strCompleteCommand)
         
         // Result of ffmpeg command

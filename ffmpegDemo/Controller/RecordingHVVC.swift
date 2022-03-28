@@ -93,7 +93,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
                 self?.timer.invalidate()
                 self?.timer = nil
                 
-                self?.executeFFMPEG(cameraVideoPath: cameraVideoPath, fileName: "potrait", exten: "mp4")
+                self?.executeFFMPEG(cameraVideoPath: cameraVideoPath, fileName: "iphone7", exten: "mp4")
                 
             }
         }
@@ -109,11 +109,11 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         super.viewWillAppear(animated)
         
         // Get file lenght
-        audioDurationSeconds = Utility.sharedUtility.getFileLenght(fileName: "potrait", exten: "mp4")
+        audioDurationSeconds = Utility.sharedUtility.getFileLenght(fileName: "iphone7", exten: "mp4")
         print(audioDurationSeconds ?? 0.0)
         
         // Play local video
-        self.playVideo(fileName: "potrait", exten: "mp4")
+        self.playVideo(fileName: "iphone7", exten: "mp4")
         
     }
     
@@ -215,11 +215,11 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         var strCommandScalling = ""
         if !isHorizontalStack! {
             // Width must be 720 of both videos left side and right side
-            strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=720:-1:force_original_aspect_ratio=1 -c:v mpeg4 -y '%@'", pickedVideoPath, scalledVideo)
+            strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=720:-1:force_original_aspect_ratio=1 -preset ultrafast -y '%@'", pickedVideoPath, scalledVideo)
             
         } else {
             // Height must be 1280 of both videos left side and right side
-            strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=-1:1280:force_original_aspect_ratio=1 -c:v mpeg4 -y '%@'", pickedVideoPath, scalledVideo)
+            strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=-1:1280:force_original_aspect_ratio=1 -preset ultrafast -y '%@'", pickedVideoPath, scalledVideo)
 //            strCommandScalling = String(format: "-hide_banner -i '%@' -filter_complex \"scale=720:1280[v1]\" -map \"[v1]\" -c:v mpeg4 -y '%@'", pickedVideoPath, scalledVideo)
         }
         

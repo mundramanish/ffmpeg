@@ -149,7 +149,7 @@ extension RecordingWithSound {
         // Set destination path
         let distinationPath = FileHelper.getDocumentDirectory()?.appending("\(currentDateTime ?? "").mp4")
         
-        let strCompleteCommand = String(format: "-hide_banner -i '%@' -i '%@' -shortest -c:v mpeg4 -y '%@'", pathAudio!, cameraVideoPath, distinationPath!)
+        let strCompleteCommand = String(format: "-hide_banner -i '%@' -i '%@' -shortest -preset ultrafast -y '%@'", pathAudio!, cameraVideoPath, distinationPath!)
         print(strCompleteCommand)
         
         // Result of ffmpeg command
