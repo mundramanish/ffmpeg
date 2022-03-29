@@ -459,7 +459,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate {
                 if self.session.canAddOutput(movieFileOutput) {
                     self.session.beginConfiguration()
                     self.session.addOutput(movieFileOutput)
-                    self.session.sessionPreset = .hd1280x720
+                    self.session.sessionPreset = .high
                     
                     self.selectedMovieMode10BitDeviceFormat = self.tenBitVariantOfFormat(activeFormat: self.videoDeviceInput.device.activeFormat)
                     
@@ -574,7 +574,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate {
                         self.session.addInput(self.videoDeviceInput)
                     }
                     if let connection = self.movieFileOutput?.connection(with: .video) {
-                        self.session.sessionPreset = .hd1280x720
+                        self.session.sessionPreset = .high
                         
                         self.selectedMovieMode10BitDeviceFormat = self.tenBitVariantOfFormat(activeFormat: self.videoDeviceInput.device.activeFormat)
                         
@@ -987,7 +987,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate {
                     self.HDRVideoModeButton.setTitle("HDR On", for: .normal)
                 } else {
                     self.session.beginConfiguration()
-                    self.session.sessionPreset = .hd1280x720
+                    self.session.sessionPreset = .high
                     self.session.commitConfiguration()
                     self.HDRVideoModeButton.setTitle("HDR Off", for: .normal)
                 }

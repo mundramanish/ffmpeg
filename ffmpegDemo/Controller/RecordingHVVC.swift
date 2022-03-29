@@ -197,6 +197,8 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     ///   - exten: Video file extension
     func executeFFMPEG(cameraVideoPath: String, fileName: String, exten: String) {
         
+        let resolution = getVideoResolution(url: cameraVideoPath)
+        
         // Picked video path
         guard let pickedVideoPath = MAIN_BUNDLE.path(forResource: fileName, ofType:exten) else {
             debugPrint("video.m4v not found")
@@ -215,11 +217,11 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         var strCommandScalling = ""
         if !isHorizontalStack! {
             // Width must be 720 of both videos left side and right side
-            strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=720:-1:force_original_aspect_ratio=1 -preset ultrafast -y '%@'", pickedVideoPath, scalledVideo)
+            strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=\(abs(resolution?.width ?? 0.0)):-1:force_original_aspect_ratio=1 -preset ultrafast -y '%@'", pickedVideoPath, scalledVideo)
             
         } else {
             // Height must be 1280 of both videos left side and right side
-            strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=-1:1280:force_original_aspect_ratio=1 -preset ultrafast -y '%@'", pickedVideoPath, scalledVideo)
+            strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=-1:\(abs(resolution?.height ?? 0.0)):force_original_aspect_ratio=1 -preset ultrafast -y '%@'", pickedVideoPath, scalledVideo)
 //            strCommandScalling = String(format: "-hide_banner -i '%@' -filter_complex \"scale=720:1280[v1]\" -map \"[v1]\" -c:v mpeg4 -y '%@'", pickedVideoPath, scalledVideo)
         }
         
@@ -258,6 +260,12 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
                 }
             }
         }
+    }
+    
+    func getVideoResolution(url: String) -> CGSize? {
+        guard let track = AVURLAsset(url: URL(fileURLWithPath: url)).tracks(withMediaType: AVMediaType.video).first else { return nil }
+        let size = track.naturalSize.applying(track.preferredTransform)
+        return size
     }
     
     func logCallback(_ executionId: Int, _ level: Int32, _ message: String!) {
