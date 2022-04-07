@@ -50,7 +50,8 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     @IBOutlet weak var linearProgress: LinearProgressBar!
     
     @IBOutlet weak var lblTimer: UILabel!
-    
+    @IBOutlet weak var lblProgress: UILabel!
+
     var counter = 0.0
     var timer: Timer!
     
@@ -281,10 +282,12 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
                     self.showAlertCancel()
                 } else {
                     self.showAlertSuccess {
-                        let path = FileHelper.getDocumentDirectory()?.appending(scalledVideo) ?? ""
                         do {
-                            if FileManager.default.fileExists(atPath: path) {
-                                try FileManager.default.removeItem(atPath: path)
+                            if FileManager.default.fileExists(atPath: scalledVideo) {
+                                try FileManager.default.removeItem(atPath: scalledVideo)
+                            }
+                            if FileManager.default.fileExists(atPath: trimVideoPath) {
+                                try FileManager.default.removeItem(atPath: trimVideoPath)
                             }
                         } catch {
                             print(error)
@@ -321,3 +324,4 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     }
     
 }
+    

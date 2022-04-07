@@ -28,6 +28,8 @@ class RecordingWithSoundLyrics: BaseViewController, StoryboardSceneBased, LogDel
     // Lyrics view
     @IBOutlet weak var lyricsView: LyricsView!
     
+    @IBOutlet weak var lblProgress: UILabel!
+    
     // Variables from previous viewcontroller
     var isCameraAudioUse: Bool!
     

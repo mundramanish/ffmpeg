@@ -26,6 +26,8 @@ class RecordingWithSound: BaseViewController, StoryboardSceneBased, LogDelegate,
     // Record button
     @IBOutlet weak var btnRecord: UIButton!
     
+    @IBOutlet weak var lblProgress: UILabel!
+
     // Audio player
     var player: AVAudioPlayer?
     

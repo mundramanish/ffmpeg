@@ -39,6 +39,8 @@ class RecordingTextImageVideoVC: BaseViewController, StoryboardSceneBased, LogDe
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var viewVideoPlayer: UIView!
     
+    @IBOutlet weak var lblProgress: UILabel!
+    
     // Video player
     var playerVideo: AVPlayer?
     
@@ -493,6 +495,7 @@ class RecordingTextImageVideoVC: BaseViewController, StoryboardSceneBased, LogDe
         if timeInMilliseconds > 0 {
             
             print((Int(timeInMilliseconds) / 1000 * (100 / Int(self.durationVideo ?? 0.0))))
+            
         }
     }
 }
