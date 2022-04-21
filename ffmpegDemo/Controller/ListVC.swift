@@ -38,7 +38,9 @@ class ListVC: UITableViewController, StoryboardSceneBased {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
-        cell.textLabel?.text = self.arrList[indexPath.row]
+        let arrTemp = self.arrList.sorted()
+        
+        cell.textLabel?.text = arrTemp[indexPath.row]
         
         return cell
     }
@@ -54,6 +56,7 @@ class ListVC: UITableViewController, StoryboardSceneBased {
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
+        
     }
 
     
@@ -81,7 +84,7 @@ class ListVC: UITableViewController, StoryboardSceneBased {
             // Delete the row from the data source
 //            tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            // Create a new insta       nce of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
     

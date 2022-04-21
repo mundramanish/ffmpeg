@@ -51,7 +51,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     
     @IBOutlet weak var lblTimer: UILabel!
     @IBOutlet weak var lblProgress: UILabel!
-
+    
     var counter = 0.0
     var timer: Timer!
     
@@ -59,6 +59,8 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     
     // Video duration
     var durationVideo: Double?
+    
+    var distinationCamera = ""
     
     // MARK: View Controller Life Cycle
     
@@ -80,10 +82,10 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
             
             self?.vc.playSoundBlock = { [weak self] () in
                 
-                // Play mp4
-                self?.playerVideo?.play()
-                
                 DispatchQueue.main.async {
+                    // Play mp4
+                    self!.playerVideo?.play()
+                    
                     self?.btnRecord.isHidden = true
                     self?.btnRecord.isSelected = true
                     self?.setLinearBarNTimer()
@@ -101,7 +103,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
                 self?.timer.invalidate()
                 self?.timer = nil
                 
-                self?.executeFFMPEG(cameraVideoPath: cameraVideoPath, fileName: "iphone7", exten: "mp4")
+                self?.executeFFMPEG(cameraVideoPath: cameraVideoPath, fileName: "potrait", exten: "mp4")
                 
             }
         }
@@ -117,11 +119,11 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         super.viewWillAppear(animated)
         
         // Get file lenght
-        audioDurationSeconds = Utility.sharedUtility.getFileLenght(fileName: "iphone7", exten: "mp4")
+        audioDurationSeconds = Utility.sharedUtility.getFileLenght(fileName: "potrait", exten: "mp4")
         print(audioDurationSeconds ?? 0.0)
         
         // Play local video
-        self.playVideo(fileName: "iphone7", exten: "mp4")
+        self.playVideo(fileName: "potrait", exten: "mp4")
         
     }
     
@@ -153,12 +155,15 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
             self.playerLayer?.videoGravity = .resizeAspect
             self.playerLayer?.frame = self.viewVideo.frame
             self.viewVideo.layer.addSublayer(self.playerLayer!)
+            
+            try! AVAudioSession.sharedInstance().setCategory(.playback)
+
         }
     }
     
     /// Linear progress bar and timer
     func setLinearBarNTimer() {
-        var counterDecrease = 30.0
+        var counterDecrease = 22.0
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             counterDecrease -= 1.0
             
@@ -198,15 +203,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         }
     }
     
-    /// FFMpeg operation will be performed
-    /// - Parameters:
-    ///   - cameraVideoPath: Camera recordrd video apth
-    ///   - fileName: Video file name
-    ///   - exten: Video file extension
-    func executeFFMPEG(cameraVideoPath: String, fileName: String, exten: String) {
-        
-        let resolution = getVideoResolution(url: cameraVideoPath)
-        
+    private func setFPSForPickedVideo(fileName: String, exten: String, resolution: CGSize, completion: ((String) -> Void)) {
         // Picked video path
         guard let pickedVideoPath = MAIN_BUNDLE.path(forResource: fileName, ofType:exten) else {
             debugPrint("video.m4v not found")
@@ -222,82 +219,173 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         // Trim to left video same as camera recorded video
         let trimVideoPath: String = distinationTrim ?? ""
         
-        let trimVideo = String(format: "-hide_banner -i '%@' -filter:v fps=30 -ss 00:00 -to \(durationVideo ?? 0) -y '%@'", pickedVideoPath, trimVideoPath)
+        // ffmpeg command to set fps of picked video
+        let trimVideo = "-hide_banner -i '\(pickedVideoPath)' -filter:v fps=30 -ss 00:00 -to \(durationVideo ?? 0) -preset ultrafast -c:v mpeg4 -y '\(trimVideoPath)'"
         print(trimVideo)
+        
         let resultTrimVideo = MobileFFmpeg.execute(trimVideo)
         
-        if resultTrimVideo != RETURN_CODE_SUCCESS {
-            self.showAlertError()
+        if resultTrimVideo == RETURN_CODE_SUCCESS {
+            completion(trimVideoPath)
         } else if resultTrimVideo == RETURN_CODE_CANCEL {
             self.showAlertCancel()
         } else {
-            // Current date and time
-            currentDateTime = Date().toString(format: .custom("hh_mm_ss"))
-            
-            // Output file path
-            let distinationScalled = FileHelper.getDocumentDirectory()?.appending("\(currentDateTime ?? "").mp4")
-            
-            // Scalling to left video same as camera recorded video
-            let scalledVideo: String = distinationScalled ?? ""
-            
-            var strCommandScalling = ""
-            if !isHorizontalStack! {
-                // Width must be 720 of both videos left side and right side
-                strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=\(abs(resolution?.width ?? 0.0)):-1:force_original_aspect_ratio=1 -preset ultrafast -y '%@'", trimVideoPath, scalledVideo)
-                
-            } else {
-                // Height must be 1280 of both videos left side and right side
-                strCommandScalling = String(format: "-hide_banner -i '%@' -vf scale=-1:\(abs(resolution?.height ?? 0.0)):force_original_aspect_ratio=1 -preset ultrafast -y '%@'", trimVideoPath, scalledVideo)
-                //            strCommandScalling = String(format: "-hide_banner -i '%@' -filter_complex \"scale=720:1280[v1]\" -map \"[v1]\" -c:v mpeg4 -y '%@'", pickedVideoPath, scalledVideo)
-            }
-            
-            print(strCommandScalling)
-            
-            let result = MobileFFmpeg.execute(strCommandScalling)
-            if result != RETURN_CODE_SUCCESS {
-                self.showAlertError()
-                
-            } else if result == RETURN_CODE_CANCEL {
-                self.showAlertCancel()
-            } else {
+            self.showAlertError()
+        }
+    }
+    
+    private func setFPAForCameraVideo(cameraVideoPath: String, resolution: CGSize, completion: (() -> Void)) {
+        
+        // Current date and time
+        currentDateTime = Date().toString(format: .custom("hh_mm_ss"))
+        
+        // Output file path
+        distinationCamera = FileHelper.getDocumentDirectory()?.appending("\(currentDateTime ?? "").mp4") ?? ""
+        
+        // ffmpeg command to set fps of camera recorded video
+        let strChangeFPS = "-hide_banner -i '\(cameraVideoPath)' -filter:v fps=30 -preset ultrafast -c:v mpeg4 -y '\(distinationCamera)'"
+        print(strChangeFPS)
+        
+        let result = MobileFFmpeg.execute(strChangeFPS)
+        
+        if result == RETURN_CODE_SUCCESS {
+            completion()
+        } else if result == RETURN_CODE_CANCEL {
+            self.showAlertCancel()
+        } else {
+            self.showAlertError()
+        }
+    }
+    
+    private func scallingVideo(trimVideoPath: String, scalledVideo: String, resolution: CGSize, completion: (() -> Void)) {
+      
+        var strCommandScalling = ""
+        if !isHorizontalStack! {
+            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=\(abs(resolution.width )):-1:force_original_aspect_ratio=1 -preset ultrafast -y '\(scalledVideo)'"
+        } else {
+            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=-1:\(abs(resolution.height )):force_original_aspect_ratio=1 -preset ultrafast -c:v mpeg4 -y '\(scalledVideo)'"
+        }
+        
+        print(strCommandScalling)
+        
+        let result = MobileFFmpeg.execute(strCommandScalling)
+        if result == RETURN_CODE_SUCCESS {
+            completion()
+        } else if result == RETURN_CODE_CANCEL {
+            self.showAlertCancel()
+        } else {
+            self.showAlertError()
+        }
+    }
+    
+    private func merge2Video(scalledVideo: String, trimVideoPath: String, completion: ((String) -> Void)) {
+        
+        // Current date and time
+        currentDateTime = Date().toString(format: .custom("hh_mm_ss"))
+        let distinationMergedPath = FileHelper.getDocumentDirectory()?.appending("\(currentDateTime ?? "").mp4")
+        
+        var strCompleteCommand = ""
+        var strStack = ""
+        if !isHorizontalStack! {
+            strStack = "vstack"
+        } else {
+            strStack = "hstack"
+        }
+        strCompleteCommand = "-hide_banner -i '\(scalledVideo)' -i '\(distinationCamera)' -filter_complex \(strStack)=inputs=2:shortest=1 -shortest -preset ultrafast -c:v mpeg4 -y \(distinationMergedPath!)"
+        print(strCompleteCommand)
+        
+        let result = MobileFFmpeg.execute(strCompleteCommand)
+        
+        if result == RETURN_CODE_SUCCESS {
+            completion(distinationMergedPath ?? "")
+        } else if result == RETURN_CODE_CANCEL {
+            self.showAlertCancel()
+        } else {
+            self.showAlertError()
+        }
+    }
+    
+    /// FFMpeg operation will be performed
+    /// - Parameters:
+    ///   - cameraVideoPath: Camera recordrd video apth
+    ///   - fileName: Video file name
+    ///   - exten: Video file extension
+    func executeFFMPEG(cameraVideoPath: String, fileName: String, exten: String) {
+
+        let resolution = getVideoResolution(url: cameraVideoPath)
+
+        setFPSForPickedVideo(fileName: fileName, exten: exten, resolution: resolution!) {trimVideoPath in
+            setFPAForCameraVideo(cameraVideoPath: cameraVideoPath, resolution: resolution!) {
                 
                 // Current date and time
                 currentDateTime = Date().toString(format: .custom("hh_mm_ss"))
-                let distinationMergedPath = FileHelper.getDocumentDirectory()?.appending("\(currentDateTime ?? "").mp4")
                 
-                var strCompleteCommand = ""
-                if !isHorizontalStack! {
-                    strCompleteCommand = String(format: "-hide_banner -i '%@' -i '%@' -filter_complex vstack=inputs=2:shortest=1 -shortest -c:v mpeg4 -y %@", scalledVideo, cameraVideoPath, distinationMergedPath!)
-                } else {
-                    strCompleteCommand = String(format: "-hide_banner -i '%@' -i '%@' -filter_complex hstack=inputs=2:shortest=1 -shortest -c:v mpeg4 -y '%@'", scalledVideo, cameraVideoPath, distinationMergedPath!)
+                // Output file path
+                let distinationScalled = FileHelper.getDocumentDirectory()?.appending("\(currentDateTime ?? "").mp4")
+                
+                // Scalling to left video same as camera recorded videos
+                let scalledVideo: String = distinationScalled ?? ""
+                
+                scallingVideo(trimVideoPath: trimVideoPath, scalledVideo: scalledVideo, resolution: resolution!) {
                     
-                }
-                
-                print(strCompleteCommand)
-                let result1 = MobileFFmpeg.execute(strCompleteCommand)
-                
-                if result1 != RETURN_CODE_SUCCESS {
-                    self.showAlertError()
-                } else if result == RETURN_CODE_CANCEL {
-                    self.showAlertCancel()
-                } else {
-                    self.showAlertSuccess {
-                        do {
-                            if FileManager.default.fileExists(atPath: scalledVideo) {
-                                try FileManager.default.removeItem(atPath: scalledVideo)
+                    if isHorizontalStack! {
+                        merge2Video(scalledVideo: scalledVideo, trimVideoPath: trimVideoPath, completion: {_ in
+                            self.showAlertSuccess {
+                                do {
+                                    if FileManager.default.fileExists(atPath: scalledVideo) {
+                                        try FileManager.default.removeItem(atPath: scalledVideo)
+                                    }
+                                    if FileManager.default.fileExists(atPath: trimVideoPath) {
+                                        try FileManager.default.removeItem(atPath: trimVideoPath)
+                                    }
+                                    if FileManager.default.fileExists(atPath: self.distinationCamera) {
+                                        try FileManager.default.removeItem(atPath: self.distinationCamera)
+                                    }
+                                } catch {
+                                    print(error)
+                                }
+                                self.navigationController?.popViewController(animated: true)
                             }
-                            if FileManager.default.fileExists(atPath: trimVideoPath) {
-                                try FileManager.default.removeItem(atPath: trimVideoPath)
+                        })
+                    } else {
+                        merge2Video(scalledVideo: scalledVideo, trimVideoPath: trimVideoPath) { merge2Video in
+                            
+                            // Current date and time
+                            currentDateTime = Date().toString(format: .custom("hh_mm_ss"))
+                            
+                            // Output file path
+                            let distinationScalled = FileHelper.getDocumentDirectory()?.appending("\(currentDateTime ?? "").mp4")
+                            
+                            // Scalling to left video same as camera recorded videos
+                            let scalledVideoAfterMerge: String = distinationScalled ?? ""
+                            
+                            scallingVideo(trimVideoPath: merge2Video, scalledVideo: scalledVideoAfterMerge, resolution: CGSize(width: 520, height: 0)) {
+                                self.showAlertSuccess {
+                                    do {
+                                        if FileManager.default.fileExists(atPath: scalledVideo) {
+                                            try FileManager.default.removeItem(atPath: scalledVideo)
+                                        }
+                                        if FileManager.default.fileExists(atPath: merge2Video) {
+                                            try FileManager.default.removeItem(atPath: merge2Video)
+                                        }
+                                        if FileManager.default.fileExists(atPath: trimVideoPath) {
+                                            try FileManager.default.removeItem(atPath: trimVideoPath)
+                                        }
+                                        if FileManager.default.fileExists(atPath: self.distinationCamera) {
+                                            try FileManager.default.removeItem(atPath: self.distinationCamera)
+                                        }
+
+                                    } catch {
+                                        print(error)
+                                    }
+                                    self.navigationController?.popViewController(animated: true)
+                                }
                             }
-                        } catch {
-                            print(error)
                         }
-                        self.navigationController?.popViewController(animated: true)
                     }
                 }
             }
         }
-        
     }
     
     func getVideoResolution(url: String) -> CGSize? {
@@ -324,4 +412,4 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     }
     
 }
-    
+

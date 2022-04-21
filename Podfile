@@ -8,7 +8,7 @@ target 'ffmpegDemo' do
   # Pods for ffmpegDemo
   # FFMPEG wrapper
   #  https://github.com/mundramanish/mobile-ffmpeg
-    pod 'mobile-ffmpeg-full', '4.4.LTS'
+    pod 'mobile-ffmpeg-full', '4.4'
     
     # Linear progress bar
     # https://github.com/mundramanish/LinearProgressBar
