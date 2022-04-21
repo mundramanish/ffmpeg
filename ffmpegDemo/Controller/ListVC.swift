@@ -46,7 +46,7 @@ class ListVC: UITableViewController, StoryboardSceneBased {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let path = FileHelper.getDocumentDirectory()?.appending(self.arrList[indexPath.row]) ?? ""
+        let path = FileHelper.getDocumentDirectory()?.appending(self.arrList.sorted()[indexPath.row]) ?? ""
 
         let videoURL = URL(fileURLWithPath: path)
         let player = AVPlayer(url: videoURL)
@@ -71,7 +71,7 @@ class ListVC: UITableViewController, StoryboardSceneBased {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let path = FileHelper.getDocumentDirectory()?.appending(self.arrList[indexPath.row]) ?? ""
+            let path = FileHelper.getDocumentDirectory()?.appending(self.arrList.sorted()[indexPath.row]) ?? ""
             do {
                 if FileManager.default.fileExists(atPath: path) {
                     try FileManager.default.removeItem(atPath: path)

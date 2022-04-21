@@ -34,10 +34,7 @@
 		A9798FC927E9EA8E00C5EBC6 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9798FC127E9EA8E00C5EBC6 /* LyricsView.swift */; };
 		A9798FCA27E9EA8E00C5EBC6 /* LyricsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9798FC227E9EA8E00C5EBC6 /* LyricsCell.swift */; };
 		A98DDB4727E845D200BD98B9 /* RecordingWithSoundLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98DDB4627E845D200BD98B9 /* RecordingWithSoundLyrics.swift */; };
-		A98DDB4B27E84DAA00BD98B9 /* IMG_0614.MOV in Resources */ = {isa = PBXBuildFile; fileRef = A98DDB4927E84DAA00BD98B9 /* IMG_0614.MOV */; };
 		A98DDB4C27E85C2C00BD98B9 /* IMG_0614.srt in Resources */ = {isa = PBXBuildFile; fileRef = A98DDB4827E84DAA00BD98B9 /* IMG_0614.srt */; };
-		A98DDB5427E886B500BD98B9 /* 2.Optionalparameters.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A98DDB5327E886B500BD98B9 /* 2.Optionalparameters.mp4 */; };
-		A98DDB5627E88CD200BD98B9 /* RW20seconds_2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A98DDB5527E88CD100BD98B9 /* RW20seconds_2.mp4 */; };
 		A98DDB5827E8935D00BD98B9 /* potraitsmall.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A98DDB5727E8935D00BD98B9 /* potraitsmall.mp4 */; };
 		A9966AC027E0490A00658751 /* rabta.mpeg in Resources */ = {isa = PBXBuildFile; fileRef = A9966ABF27E0490A00658751 /* rabta.mpeg */; };
 		A9966AC427E04B9100658751 /* rabta_mp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9966AC327E04B9100658751 /* rabta_mp3.mp3 */; };
@@ -104,9 +101,6 @@
 		A9798FC227E9EA8E00C5EBC6 /* LyricsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsCell.swift; sourceTree = "<group>"; };
 		A98DDB4627E845D200BD98B9 /* RecordingWithSoundLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingWithSoundLyrics.swift; sourceTree = "<group>"; };
 		A98DDB4827E84DAA00BD98B9 /* IMG_0614.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IMG_0614.srt; sourceTree = "<group>"; };
-		A98DDB4927E84DAA00BD98B9 /* IMG_0614.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0614.MOV; sourceTree = "<group>"; };
-		A98DDB5327E886B500BD98B9 /* 2.Optionalparameters.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.Optionalparameters.mp4; sourceTree = "<group>"; };
-		A98DDB5527E88CD100BD98B9 /* RW20seconds_2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RW20seconds_2.mp4; sourceTree = "<group>"; };
 		A98DDB5727E8935D00BD98B9 /* potraitsmall.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = potraitsmall.mp4; sourceTree = "<group>"; };
 		A9966ABF27E0490A00658751 /* rabta.mpeg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = rabta.mpeg; sourceTree = "<group>"; };
 		A9966AC327E04B9100658751 /* rabta_mp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rabta_mp3.mp3; sourceTree = "<group>"; };
@@ -249,9 +243,6 @@
 				A9E6575127E9840700AD05E6 /* valentines.jpg */,
 				A9E6574D27E9840600AD05E6 /* wave.jpg */,
 				A98DDB5727E8935D00BD98B9 /* potraitsmall.mp4 */,
-				A98DDB5527E88CD100BD98B9 /* RW20seconds_2.mp4 */,
-				A98DDB5327E886B500BD98B9 /* 2.Optionalparameters.mp4 */,
-				A98DDB4927E84DAA00BD98B9 /* IMG_0614.MOV */,
 				A98DDB4827E84DAA00BD98B9 /* IMG_0614.srt */,
 				A9EEE96C27E7558A00061886 /* 4.png */,
 				A9EEE96D27E7558B00061886 /* 5.jpeg */,
@@ -442,14 +433,11 @@
 				A9E6575A27E9840800AD05E6 /* us_outerworlds.jpg in Resources */,
 				A9798FB727E9E67000C5EBC6 /* AlessoSadSongOfficialMusicVideo.mp3 in Resources */,
 				A907A2B627DF2076004E7B45 /* LaunchScreen.storyboard in Resources */,
-				A98DDB5427E886B500BD98B9 /* 2.Optionalparameters.mp4 in Resources */,
 				A9EEE96F27E7558B00061886 /* 5.jpeg in Resources */,
 				A9D2102B27E1FF990016011A /* BebasNeueBold.ttf in Resources */,
 				A907A2B327DF2076004E7B45 /* Assets.xcassets in Resources */,
-				A98DDB4B27E84DAA00BD98B9 /* IMG_0614.MOV in Resources */,
 				A9EEE96E27E7558B00061886 /* 4.png in Resources */,
 				A9966AD227E0CC8F00658751 /* potrait.mp4 in Resources */,
-				A98DDB5627E88CD200BD98B9 /* RW20seconds_2.mp4 in Resources */,
 				A9966AD127E0CC8F00658751 /* landscape.mp4 in Resources */,
 				A9C7F71E27EAF48F00CCDBFC /* IMG_0614.ass in Resources */,
 				A9E6575F27E9840800AD05E6 /* us_office2.jpg in Resources */,
@@ -702,6 +690,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -739,6 +728,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
