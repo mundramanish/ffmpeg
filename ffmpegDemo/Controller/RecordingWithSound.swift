@@ -115,7 +115,9 @@ class RecordingWithSound: BaseViewController, StoryboardSceneBased, LogDelegate,
     }
     
     func logCallback(_ executionId: Int, _ level: Int32, _ message: String!) {
+        print("=====================")
         print(message ?? "")
+        print("=====================")
     }
     
     func statisticsCallback(_ statistics: Statistics!) {

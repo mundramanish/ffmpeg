@@ -64,6 +64,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     
     // MARK: View Controller Life Cycle
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -163,7 +164,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     
     /// Linear progress bar and timer
     func setLinearBarNTimer() {
-        var counterDecrease = 22.0
+        var counterDecrease = 125.0
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             counterDecrease -= 1.0
             
@@ -203,6 +204,12 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         }
     }
     
+    /// Function to set FPS 30 for picked video
+    /// - Parameters:
+    ///   - fileName: Picked video file name
+    ///   - exten: Picked video
+    ///   - resolution: SCreen resolution
+    ///   - completion: completion block after successully command done
     private func setFPSForPickedVideo(fileName: String, exten: String, resolution: CGSize, completion: ((String) -> Void)) {
         // Picked video path
         guard let pickedVideoPath = MAIN_BUNDLE.path(forResource: fileName, ofType:exten) else {
@@ -220,7 +227,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         let trimVideoPath: String = distinationTrim ?? ""
         
         // ffmpeg command to set fps of picked video
-        let trimVideo = "-hide_banner -i '\(pickedVideoPath)' -filter:v fps=30 -ss 00:00 -to \(durationVideo ?? 0) -preset ultrafast -c:v mpeg4 -y '\(trimVideoPath)'"
+        let trimVideo = "-hide_banner -i '\(pickedVideoPath)' -filter:v fps=30 -ss 00:00 -to \(durationVideo ?? 0) -preset fast -c:v mpeg4 -y '\(trimVideoPath)'"
         print(trimVideo)
         
         let resultTrimVideo = MobileFFmpeg.execute(trimVideo)
@@ -234,6 +241,11 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         }
     }
     
+    /// Function to set FPS 30 for camera recorded video
+    /// - Parameters:
+    ///   - cameraVideoPath: Picked video file name
+    ///   - resolution: SCreen resolution
+    ///   - completion: completion block after successully command done
     private func setFPAForCameraVideo(cameraVideoPath: String, resolution: CGSize, completion: (() -> Void)) {
         
         // Current date and time
@@ -243,7 +255,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         distinationCamera = FileHelper.getDocumentDirectory()?.appending("\(currentDateTime ?? "").mp4") ?? ""
         
         // ffmpeg command to set fps of camera recorded video
-        let strChangeFPS = "-hide_banner -i '\(cameraVideoPath)' -filter:v fps=30 -preset ultrafast -c:v mpeg4 -y '\(distinationCamera)'"
+        let strChangeFPS = "-hide_banner -i '\(cameraVideoPath)' -filter:v fps=30 -preset fast -c:v mpeg4 -y '\(distinationCamera)'"
         print(strChangeFPS)
         
         let result = MobileFFmpeg.execute(strChangeFPS)
@@ -257,15 +269,21 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         }
     }
     
+    /// Function to scale picked video
+    /// - Parameters:
+    ///   - trimVideoPath: Picked video path
+    ///   - scalledVideo: Scalled video destination path
+    ///   - resolution: SCreen resolution
+    ///   - completion: completion block after successully command done
     private func scallingVideo(trimVideoPath: String, scalledVideo: String, resolution: CGSize, completion: (() -> Void)) {
       
         var strCommandScalling = ""
         if !isHorizontalStack! {
-            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=\(abs(resolution.width )):-1:force_original_aspect_ratio=1 -preset ultrafast -y '\(scalledVideo)'"
+            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=\(abs(resolution.width )):-1:force_original_aspect_ratio=1 -preset fast -y '\(scalledVideo)'"
         } else {
-            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=-1:\(abs(resolution.height )):force_original_aspect_ratio=1 -preset ultrafast -c:v mpeg4 -y '\(scalledVideo)'"
+            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=-1:\(abs(resolution.height )):force_original_aspect_ratio=1 -preset fast -c:v mpeg4 -y '\(scalledVideo)'"
         }
-        
+            
         print(strCommandScalling)
         
         let result = MobileFFmpeg.execute(strCommandScalling)
@@ -278,6 +296,11 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         }
     }
     
+    /// Function to merge 2 video [Picked video and Camera video]
+    /// - Parameters:
+    ///   - scalledVideo: Scalled video path which is picked by user
+    ///   - trimVideoPath: Picked video is trimmed duration same as camera duration
+    ///   - completion: completion block after successully command done
     private func merge2Video(scalledVideo: String, trimVideoPath: String, completion: ((String) -> Void)) {
         
         // Current date and time
@@ -291,7 +314,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         } else {
             strStack = "hstack"
         }
-        strCompleteCommand = "-hide_banner -i '\(scalledVideo)' -i '\(distinationCamera)' -filter_complex \(strStack)=inputs=2:shortest=1 -shortest -preset ultrafast -c:v mpeg4 -y \(distinationMergedPath!)"
+        strCompleteCommand = "-hide_banner -i '\(scalledVideo)' -i '\(distinationCamera)' -filter_complex \(strStack)=inputs=2:shortest=1 -shortest -preset fast -c:v mpeg4 -y \(distinationMergedPath!)"
         print(strCompleteCommand)
         
         let result = MobileFFmpeg.execute(strCompleteCommand)
@@ -395,6 +418,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     }
     
     func logCallback(_ executionId: Int, _ level: Int32, _ message: String!) {
+        print("===================")
         print(message ?? "")
     }
     
