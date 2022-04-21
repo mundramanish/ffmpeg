@@ -17,7 +17,6 @@
 		A907A2C527DF2D28004E7B45 /* StoryboardSceneBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907A2C427DF2D28004E7B45 /* StoryboardSceneBased.swift */; };
 		A907A2CE27DF64DD004E7B45 /* KDCircularProgress in Frameworks */ = {isa = PBXBuildFile; productRef = A907A2CD27DF64DD004E7B45 /* KDCircularProgress */; };
 		A90E8B5E27F2D0C700F43C56 /* iphone7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A90E8B5D27F2D0C700F43C56 /* iphone7.mp4 */; };
-		A91AB9B52811441500FA6E37 /* IMG_1286.MOV in Resources */ = {isa = PBXBuildFile; fileRef = A91AB9B42811441500FA6E37 /* IMG_1286.MOV */; };
 		A92A9C8E27EC38AC0079DFAC /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92A9C8D27EC38AC0079DFAC /* PhotoCaptureDelegate.swift */; };
 		A9798FAC27E9DA9700C5EBC6 /* SRT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9798FA927E9DA9700C5EBC6 /* SRT.swift */; };
 		A9798FAD27E9DA9700C5EBC6 /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9798FAA27E9DA9700C5EBC6 /* Segment.swift */; };
@@ -87,7 +86,6 @@
 		A907A2C027DF2A67004E7B45 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		A907A2C427DF2D28004E7B45 /* StoryboardSceneBased.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSceneBased.swift; sourceTree = "<group>"; };
 		A90E8B5D27F2D0C700F43C56 /* iphone7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iphone7.mp4; sourceTree = "<group>"; };
-		A91AB9B42811441500FA6E37 /* IMG_1286.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_1286.MOV; sourceTree = "<group>"; };
 		A92A9C8D27EC38AC0079DFAC /* PhotoCaptureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegate.swift; sourceTree = "<group>"; };
 		A9798FA927E9DA9700C5EBC6 /* SRT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRT.swift; sourceTree = "<group>"; };
 		A9798FAA27E9DA9700C5EBC6 /* Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 		A907A2C827DF62E4004E7B45 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A91AB9B42811441500FA6E37 /* IMG_1286.MOV */,
 				A90E8B5D27F2D0C700F43C56 /* iphone7.mp4 */,
 				A9C7F71D27EAF48F00CCDBFC /* IMG_0614.ass */,
 				A9798FB627E9E67000C5EBC6 /* AlessoSadSongOfficialMusicVideo.mp3 */,
@@ -435,7 +432,6 @@
 				A9EEE96727E7309700061886 /* 2.png in Resources */,
 				A98DDB5827E8935D00BD98B9 /* potraitsmall.mp4 in Resources */,
 				A90E8B5E27F2D0C700F43C56 /* iphone7.mp4 in Resources */,
-				A91AB9B52811441500FA6E37 /* IMG_1286.MOV in Resources */,
 				A9966AC027E0490A00658751 /* rabta.mpeg in Resources */,
 				A9CEA1B627DF8003001B9F32 /* README_FileHelper.rtf in Resources */,
 				A9E6575927E9840800AD05E6 /* us_lab.jpg in Resources */,
