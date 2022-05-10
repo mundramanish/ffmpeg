@@ -16,7 +16,8 @@
 		A907A2C227DF2A67004E7B45 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907A2C027DF2A67004E7B45 /* PreviewView.swift */; };
 		A907A2C527DF2D28004E7B45 /* StoryboardSceneBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907A2C427DF2D28004E7B45 /* StoryboardSceneBased.swift */; };
 		A907A2CE27DF64DD004E7B45 /* KDCircularProgress in Frameworks */ = {isa = PBXBuildFile; productRef = A907A2CD27DF64DD004E7B45 /* KDCircularProgress */; };
-		A90E8B5E27F2D0C700F43C56 /* iphone7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A90E8B5D27F2D0C700F43C56 /* iphone7.mp4 */; };
+		A91AB9BA28118FC800FA6E37 /* Landscape.MOV in Resources */ = {isa = PBXBuildFile; fileRef = A91AB9B828118FC700FA6E37 /* Landscape.MOV */; };
+		A91AB9BB28118FC800FA6E37 /* Potrait.MOV in Resources */ = {isa = PBXBuildFile; fileRef = A91AB9B928118FC800FA6E37 /* Potrait.MOV */; };
 		A92A9C8E27EC38AC0079DFAC /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92A9C8D27EC38AC0079DFAC /* PhotoCaptureDelegate.swift */; };
 		A9798FAC27E9DA9700C5EBC6 /* SRT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9798FA927E9DA9700C5EBC6 /* SRT.swift */; };
 		A9798FAD27E9DA9700C5EBC6 /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9798FAA27E9DA9700C5EBC6 /* Segment.swift */; };
@@ -39,7 +40,6 @@
 		A9966AC027E0490A00658751 /* rabta.mpeg in Resources */ = {isa = PBXBuildFile; fileRef = A9966ABF27E0490A00658751 /* rabta.mpeg */; };
 		A9966AC427E04B9100658751 /* rabta_mp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9966AC327E04B9100658751 /* rabta_mp3.mp3 */; };
 		A9966AD127E0CC8F00658751 /* landscape.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A9966ACF27E0CC8F00658751 /* landscape.mp4 */; };
-		A9966AD227E0CC8F00658751 /* potrait.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A9966AD027E0CC8F00658751 /* potrait.mp4 */; };
 		A9C7F71C27EAED2B00CCDBFC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C7F71B27EAED2B00CCDBFC /* BaseViewController.swift */; };
 		A9C7F71E27EAF48F00CCDBFC /* IMG_0614.ass in Resources */ = {isa = PBXBuildFile; fileRef = A9C7F71D27EAF48F00CCDBFC /* IMG_0614.ass */; };
 		A9CEA1B527DF8003001B9F32 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CEA1B327DF8003001B9F32 /* FileHelper.swift */; };
@@ -82,7 +82,8 @@
 		A907A2B727DF2076004E7B45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A907A2C027DF2A67004E7B45 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		A907A2C427DF2D28004E7B45 /* StoryboardSceneBased.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSceneBased.swift; sourceTree = "<group>"; };
-		A90E8B5D27F2D0C700F43C56 /* iphone7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iphone7.mp4; sourceTree = "<group>"; };
+		A91AB9B828118FC700FA6E37 /* Landscape.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Landscape.MOV; sourceTree = "<group>"; };
+		A91AB9B928118FC800FA6E37 /* Potrait.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Potrait.MOV; sourceTree = "<group>"; };
 		A92A9C8D27EC38AC0079DFAC /* PhotoCaptureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegate.swift; sourceTree = "<group>"; };
 		A9798FA927E9DA9700C5EBC6 /* SRT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRT.swift; sourceTree = "<group>"; };
 		A9798FAA27E9DA9700C5EBC6 /* Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
@@ -105,7 +106,6 @@
 		A9966ABF27E0490A00658751 /* rabta.mpeg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = rabta.mpeg; sourceTree = "<group>"; };
 		A9966AC327E04B9100658751 /* rabta_mp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rabta_mp3.mp3; sourceTree = "<group>"; };
 		A9966ACF27E0CC8F00658751 /* landscape.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = landscape.mp4; sourceTree = "<group>"; };
-		A9966AD027E0CC8F00658751 /* potrait.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = potrait.mp4; sourceTree = "<group>"; };
 		A9C7F71B27EAED2B00CCDBFC /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A9C7F71D27EAF48F00CCDBFC /* IMG_0614.ass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IMG_0614.ass; sourceTree = "<group>"; };
 		A9CEA1B327DF8003001B9F32 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
@@ -229,7 +229,8 @@
 		A907A2C827DF62E4004E7B45 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A90E8B5D27F2D0C700F43C56 /* iphone7.mp4 */,
+				A91AB9B828118FC700FA6E37 /* Landscape.MOV */,
+				A91AB9B928118FC800FA6E37 /* Potrait.MOV */,
 				A9C7F71D27EAF48F00CCDBFC /* IMG_0614.ass */,
 				A9798FB627E9E67000C5EBC6 /* AlessoSadSongOfficialMusicVideo.mp3 */,
 				A9E6575327E9840700AD05E6 /* uglysweater2.jpg */,
@@ -250,7 +251,6 @@
 				A9EEE96327E7309600061886 /* 3.jpeg */,
 				A9D2102A27E1FF990016011A /* BebasNeueBold.ttf */,
 				A9966ACF27E0CC8F00658751 /* landscape.mp4 */,
-				A9966AD027E0CC8F00658751 /* potrait.mp4 */,
 				A9966AC327E04B9100658751 /* rabta_mp3.mp3 */,
 				A9966ABF27E0490A00658751 /* rabta.mpeg */,
 			);
@@ -422,8 +422,8 @@
 				A9E6575C27E9840800AD05E6 /* uglysweater3.jpg in Resources */,
 				A9EEE96727E7309700061886 /* 2.png in Resources */,
 				A98DDB5827E8935D00BD98B9 /* potraitsmall.mp4 in Resources */,
-				A90E8B5E27F2D0C700F43C56 /* iphone7.mp4 in Resources */,
 				A9966AC027E0490A00658751 /* rabta.mpeg in Resources */,
+				A91AB9BA28118FC800FA6E37 /* Landscape.MOV in Resources */,
 				A9CEA1B627DF8003001B9F32 /* README_FileHelper.rtf in Resources */,
 				A9E6575927E9840800AD05E6 /* us_lab.jpg in Resources */,
 				A9966AC427E04B9100658751 /* rabta_mp3.mp3 in Resources */,
@@ -431,13 +431,13 @@
 				A9E6575D27E9840800AD05E6 /* uglysweater2.jpg in Resources */,
 				A9E6575E27E9840800AD05E6 /* us_home.jpg in Resources */,
 				A9E6575A27E9840800AD05E6 /* us_outerworlds.jpg in Resources */,
+				A91AB9BB28118FC800FA6E37 /* Potrait.MOV in Resources */,
 				A9798FB727E9E67000C5EBC6 /* AlessoSadSongOfficialMusicVideo.mp3 in Resources */,
 				A907A2B627DF2076004E7B45 /* LaunchScreen.storyboard in Resources */,
 				A9EEE96F27E7558B00061886 /* 5.jpeg in Resources */,
 				A9D2102B27E1FF990016011A /* BebasNeueBold.ttf in Resources */,
 				A907A2B327DF2076004E7B45 /* Assets.xcassets in Resources */,
 				A9EEE96E27E7558B00061886 /* 4.png in Resources */,
-				A9966AD227E0CC8F00658751 /* potrait.mp4 in Resources */,
 				A9966AD127E0CC8F00658751 /* landscape.mp4 in Resources */,
 				A9C7F71E27EAF48F00CCDBFC /* IMG_0614.ass in Resources */,
 				A9E6575F27E9840800AD05E6 /* us_office2.jpg in Resources */,

@@ -104,8 +104,11 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
                 self?.timer.invalidate()
                 self?.timer = nil
                 
-                self?.executeFFMPEG(cameraVideoPath: cameraVideoPath, fileName: "potrait", exten: "mp4")
-                
+                if self!.isHorizontalStack! {
+                    self?.executeFFMPEG(cameraVideoPath: cameraVideoPath, fileName: "Potrait", exten: "MOV")
+                } else {
+                    self?.executeFFMPEG(cameraVideoPath: cameraVideoPath, fileName: "Landscape", exten: "MOV")
+                }
             }
         }
         //  Delegates Log and Statistics
@@ -119,13 +122,23 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Get file lenght
-        audioDurationSeconds = Utility.sharedUtility.getFileLenght(fileName: "potrait", exten: "mp4")
-        print(audioDurationSeconds ?? 0.0)
-        
-        // Play local video
-        self.playVideo(fileName: "potrait", exten: "mp4")
-        
+        if isHorizontalStack! {
+            // Get file lenght
+            audioDurationSeconds = Utility.sharedUtility.getFileLenght(fileName: "Potrait", exten: "MOV")
+            print(audioDurationSeconds ?? 0.0)
+            
+            // Play local video
+            self.playVideo(fileName: "Potrait", exten: "MOV")
+
+        } else {
+            // Get file lenght
+            audioDurationSeconds = Utility.sharedUtility.getFileLenght(fileName: "Landscape", exten: "MOV")
+            print(audioDurationSeconds ?? 0.0)
+            
+            // Play local video
+            self.playVideo(fileName: "Landscape", exten: "MOV")
+
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -164,7 +177,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
     
     /// Linear progress bar and timer
     func setLinearBarNTimer() {
-        var counterDecrease = 125.0
+        var counterDecrease = audioDurationSeconds!
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             counterDecrease -= 1.0
             
@@ -227,7 +240,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         let trimVideoPath: String = distinationTrim ?? ""
         
         // ffmpeg command to set fps of picked video
-        let trimVideo = "-hide_banner -i '\(pickedVideoPath)' -filter:v fps=30 -ss 00:00 -to \(durationVideo ?? 0) -preset fast -c:v mpeg4 -y '\(trimVideoPath)'"
+        let trimVideo = "-hide_banner -i '\(pickedVideoPath)' -filter:v fps=30 -ss 00:00 -to \(durationVideo ?? 0) -preset fast -c:v mpeg4 -qscale 0 -y '\(trimVideoPath)'"
         print(trimVideo)
         
         let resultTrimVideo = MobileFFmpeg.execute(trimVideo)
@@ -255,7 +268,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         distinationCamera = FileHelper.getDocumentDirectory()?.appending("\(currentDateTime ?? "").mp4") ?? ""
         
         // ffmpeg command to set fps of camera recorded video
-        let strChangeFPS = "-hide_banner -i '\(cameraVideoPath)' -filter:v fps=30 -preset fast -c:v mpeg4 -y '\(distinationCamera)'"
+        let strChangeFPS = "-hide_banner -i '\(cameraVideoPath)' -filter:v fps=30 -preset fast -c:v mpeg4 -qscale 0 -y '\(distinationCamera)'"
         print(strChangeFPS)
         
         let result = MobileFFmpeg.execute(strChangeFPS)
@@ -279,9 +292,9 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
       
         var strCommandScalling = ""
         if !isHorizontalStack! {
-            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=\(abs(resolution.width )):-1:force_original_aspect_ratio=1 -preset fast -y '\(scalledVideo)'"
+            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=\(abs(resolution.width )):-1:force_original_aspect_ratio=1 -preset fast -qscale 0 -y '\(scalledVideo)'"
         } else {
-            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=-1:\(abs(resolution.height )):force_original_aspect_ratio=1 -preset fast -c:v mpeg4 -y '\(scalledVideo)'"
+            strCommandScalling = "-hide_banner -i '\(trimVideoPath)' -vf scale=-1:\(abs(resolution.height )):force_original_aspect_ratio=1 -qscale 0 -preset fast -c:v mpeg4 -y '\(scalledVideo)'"
         }
             
         print(strCommandScalling)
@@ -314,7 +327,7 @@ class RecordingHVVC: BaseViewController, StoryboardSceneBased, LogDelegate, Stat
         } else {
             strStack = "hstack"
         }
-        strCompleteCommand = "-hide_banner -i '\(scalledVideo)' -i '\(distinationCamera)' -filter_complex \(strStack)=inputs=2:shortest=1 -shortest -preset fast -c:v mpeg4 -y \(distinationMergedPath!)"
+        strCompleteCommand = "-hide_banner -i '\(scalledVideo)' -i '\(distinationCamera)' -filter_complex \(strStack)=inputs=2:shortest=1 -shortest -preset fast -c:v mpeg4 -qscale 0 -y \(distinationMergedPath!)"
         print(strCompleteCommand)
         
         let result = MobileFFmpeg.execute(strCompleteCommand)
